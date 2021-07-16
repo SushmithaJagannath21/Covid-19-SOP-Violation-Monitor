@@ -3,7 +3,6 @@
      - conda-forge
  dependencies:
      - dlib
-     - libgcc=5.2.0
      - numpy
      - scipy
      - opencv
