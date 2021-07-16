@@ -13,7 +13,7 @@ import time
 import math
 import pickle
 from imutils.video import VideoStream
-import face_recognition
+#import face_recognition
 import imutils
 import pandas as pd
 import base64
@@ -289,11 +289,11 @@ def get_table_download_link1(df):
     href = f'<a href="data:file/csv;base64,{b64}" download="summary.csv">Download summary file</a>'
     return href
 
-def get_table_download_link2(df):
-    csv = df.to_csv(index=False)
-    b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-    href = f'<a href="data:file/csv;base64,{b64}" download="summary.csv">Download No-mask Identities</a>'
-    return href
+#def get_table_download_link2(df):
+ #   csv = df.to_csv(index=False)
+  #  b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+   # href = f'<a href="data:file/csv;base64,{b64}" download="summary.csv">Download No-mask Identities</a>'
+    #return href
 
 @st.cache(allow_output_mutation=True, max_entries=2, ttl=60)
 def download_wget():
@@ -380,7 +380,7 @@ def main():
             nomaskarr=[]
             higharr=[]
             safearr=[]
-            namearr=[]
+            #namearr=[]
             j=0
             while True:
                 now = time.time()
@@ -399,8 +399,8 @@ def main():
                     img_array1.append(img1)
                     higharr.append(finhigh)
                     safearr.append(finsafe)
-                    img2=face_recognise(detector, data, image)
-                    img_arr2.append(img2)
+                    #img2=face_recognise(detector, data, image)
+                    #img_arr2.append(img2)
                     #image_placeholder1.image(img1,channels="BGR") 
                     boxes = []
                     for i in range(len(result)):
@@ -421,7 +421,7 @@ def main():
                         img_array.append(img)
                     start = time.time()
                     #print(start)
-            print(namearr)
+            #print(namearr)
             mask_avg=sum(maskarr)
             mask_avg= (mask_avg/len(maskarr))
             #st.text("AVERAGE MASK PERCENTAGE:"+(str(int(mask_avg))))
@@ -435,11 +435,11 @@ def main():
             high_avg= (high_avg/len(higharr))
             #st.text("AVERAGE SOCIAL DISTANCE VIOLATION PERCENTAGE:"+(str(100-int(safe_avg))))
             out = cv2.VideoWriter('demo_.avi', 0, 24, (h,w))
-            namelist=list(dict.fromkeys(caught))
-            s=" ; "
-            s=s.join(namelist)
+            #namelist=list(dict.fromkeys(caught))
+            #s=" ; "
+            #s=s.join(namelist)
             #st.text("FACES RECOGNIZED WITHOUT MASK:" + s)
-            data1=pd.DataFrame(namelist, columns=["RECOGNIZED PEOPLE"])
+            #data1=pd.DataFrame(namelist, columns=["RECOGNIZED PEOPLE"])
             my_dict={'ANALYSIS':["AVERAGE MASK PERCENTAGE:","AVERAGE WITHOUT-MASK PERCENTAGE:","AVERAGE SOCIAL DISTANCE MAINTAINED PERCENTAGE:","AVERAGE SOCIAL DISTANCE VIOLATION PERCENTAGE:"],'SUMMARY %':[(int(mask_avg)),(int(nomask_avg)),(int(safe_avg)),(100-int(safe_avg))]}
             df=pd.DataFrame(my_dict)
             sub_title = '<p style=" font-type:bold; color:#faca2b; font-size: 25px;">STATISTICAL REPORT</p>'
@@ -455,31 +455,31 @@ def main():
 
             fig.update_yaxes(automargin=True)
             #fig.update_layout(margin=dict(l=0,r=0,b=0,t=0),paper_bgcolor='seagreen',font=dict(family="Courier New, monospace",size=16,))      
-            fig1 = go.Figure(data=[go.Table(header=dict(values=list(data1.columns),fill_color='darkslategray',align='left'),cells=dict(values=[data1['RECOGNIZED PEOPLE']],fill_color='teal',align='left',height=30))])
-            fig1.update_layout(
-    autosize=False,
-    width=300,
-    height=300,
-    margin=dict(l=2,r=2,b=2,t=2),
-    paper_bgcolor='teal',
-    font=dict(family="Courier New, monospace",size=16)
-)
+            #fig1 = go.Figure(data=[go.Table(header=dict(values=list(data1.columns),fill_color='darkslategray',align='left'),cells=dict(values=[data1['RECOGNIZED PEOPLE']],fill_color='teal',align='left',height=30))])
+            #fig1.update_layout(
+    #autosize=False,
+    #width=300,
+    #height=300,
+    #margin=dict(l=2,r=2,b=2,t=2),
+    #paper_bgcolor='teal',
+    #font=dict(family="Courier New, monospace",size=16)
+#)
             st.write(fig)
-            st.write(fig1)
+            #st.write(fig1)
             st.markdown(get_table_download_link1(df), unsafe_allow_html=True)
-            st.markdown(get_table_download_link2(data1), unsafe_allow_html=True)
+            #st.markdown(get_table_download_link2(data1), unsafe_allow_html=True)
             for i in range(len(img_array)):
                 for _ in range(10): 
                     out.write(img_array[i])
             for i in range(len(img_array1)):
                 for _ in range(10): 
                     out.write(img_array1[i])
-            for i in range(len(img_arr2)):
-                for _ in range(10): 
-                    out.write(img_arr2[i])
+            #for i in range(len(img_arr2)):
+             #   for _ in range(10): 
+              #      out.write(img_arr2[i])
             out.release()
             cap.release()
-            del model, detector, data, net, img_array, img_array1, img_arr2, data1, df, maskarr, nomaskarr, higharr, safearr, namearr, cap 
+            del model, detector, data, net, img_array, img_array1, df, maskarr, nomaskarr, higharr, safearr, cap 
             gc.collect()
                                
     elif choice == 'About':
@@ -494,3 +494,4 @@ def main():
 if __name__ == '__main__':
         main()
         
+© 2021 GitHub, Inc.
