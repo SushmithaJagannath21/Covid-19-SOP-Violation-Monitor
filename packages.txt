@@ -5,3 +5,4 @@ freeglut3-dev
 cmake
 libopenblas-dev
 wget
+upgrade libstdc++6
