@@ -5,3 +5,4 @@ freeglut3-dev
 cmake
 libopenblas-dev
 wget
+gcc-4.9
