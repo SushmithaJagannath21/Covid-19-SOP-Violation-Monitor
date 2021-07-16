@@ -5,3 +5,6 @@ freeglut3-dev
 cmake
 libopenblas-dev
 wget
+build-essential
+aptitude
+libstdc++6
