@@ -6,6 +6,7 @@
      - numpy
      - scipy
      - opencv
+     - libgcc=5.2.0
      - face_recognition
      - pip 
      - pip:
